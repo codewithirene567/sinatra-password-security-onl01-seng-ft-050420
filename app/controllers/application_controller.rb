@@ -17,7 +17,16 @@ class ApplicationController < Sinatra::Base
 	end
 
 	post "/signup" do
-		#your code here!
+		user = User.new(:username => params[:username], :password => params[:password])
+
+		if user.save
+			redirect "/login"
+		else
+			redirect "/faliure"
+		end
+		#this conditional logic needs a username and a password to go into the params hash
+		#which means that if both are not there then the faliure page will show up because it could not
+		#be saved
 	end
 
 	get "/login" do
